@@ -3,7 +3,7 @@ using System;
 public static class Actions
 {
     #region ENEMIES
-    public static Action OnBirdDestroyed;
+    public static Action OnEnemyDestroyed;
     public static Action OnPlaneDestroyed;
     public static Action OnRocketHit;
     public static Action OnBirdHit;
