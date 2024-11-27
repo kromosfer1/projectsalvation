@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 7577545729034660425}
   - component: {fileID: 4033043575392628676}
   - component: {fileID: 2741767061735596375}
+  - component: {fileID: -4727309676050126068}
   - component: {fileID: 2718004264323292518}
-  m_Layer: 3
+  - component: {fileID: -3760327968991365677}
+  m_Layer: 6
   m_Name: RedEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,6 +118,42 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!58 &-4727309676050126068
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5450073368629586329}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.5
 --- !u!114 &2718004264323292518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,3 +168,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rb: {fileID: 2741767061735596375}
   _enemyData: {fileID: 11400000, guid: 86a60c0c720914f08b4120bfd0c00af9, type: 2}
+--- !u!114 &-3760327968991365677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5450073368629586329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e6138c1fb044def8c0a2822921cdf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitPoints: 2

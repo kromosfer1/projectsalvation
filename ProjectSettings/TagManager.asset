@@ -8,11 +8,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Enemy
+  - 
   - Water
   - UI
-  - 
-  - 
+  - RedEnemy
+  - RedBullets
   - 
   - 
   - 
@@ -41,8 +41,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Turrets
-    uniqueID: 0
+  - name: Turret
+    uniqueID: 4102185507
     locked: 0
   m_RenderingLayers:
   - Default
