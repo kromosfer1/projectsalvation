@@ -4,5 +4,11 @@ using UnityEngine;
 public class EnemyData : ScriptableObject
 {
     [Header("Movement Data")]
-    public float _movementSpeed = 2f;
+    public float MovementSpeed = 2f;
+
+    [Header("Health Data")]
+    public int HitPoints = 2;
+
+    [Header("Economy Data")]
+    public int CurrencyWorth = 1;
 }

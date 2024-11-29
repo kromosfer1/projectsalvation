@@ -39,6 +39,6 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector2 dir = (target.position - transform.position).normalized;
 
-        _rb.linearVelocity = dir * _enemyData._movementSpeed;
+        _rb.linearVelocity = dir * _enemyData.MovementSpeed;
     }
 }

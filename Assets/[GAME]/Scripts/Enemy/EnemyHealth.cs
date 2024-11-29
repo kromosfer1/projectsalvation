@@ -2,16 +2,20 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [Header("Attributes")]
-    [SerializeField] private int _hitPoints = 2;
+    [Header("References")]    
+    [SerializeField] private EnemyData _enemyData;
+
+    private bool isDestroyed = false;
 
     public void TakeDamage(int dmg)
     {
-        _hitPoints -= dmg;
+        _enemyData.HitPoints -= dmg;
 
-        if (_hitPoints <= 0)
+        if (_enemyData.HitPoints <= 0 && !isDestroyed)
         {
             Actions.OnEnemyDestroyed?.Invoke();
+            CurrencyManager.main.IncreaseCurrency(_enemyData.CurrencyWorth);
+            isDestroyed = true;
             Destroy(gameObject);
         }
     }
