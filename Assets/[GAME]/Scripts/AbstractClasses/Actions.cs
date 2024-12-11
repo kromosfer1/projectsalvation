@@ -8,6 +8,7 @@ public static class Actions
     public static Action OnRocketHit;
     public static Action OnBirdHit;
     public static Action OnPlaneHit;
+    public static Action<float> UpdateSpeed;
     #endregion
 
     #region PLAYER
