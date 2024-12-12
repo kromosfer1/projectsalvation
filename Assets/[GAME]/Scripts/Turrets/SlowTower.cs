@@ -1,4 +1,6 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class SlowTower : MonoBehaviour
@@ -8,35 +10,76 @@ public class SlowTower : MonoBehaviour
 
     [Header("Attributes")]
     [SerializeField] private float _targetingRange = 5f;
-    [SerializeField] private float _aps = 3f; // attacks per second
+    [SerializeField] private float _aps = 1f; // actions per second
     [SerializeField] private float _slowSpeed = 0.5f;
+    [SerializeField] private float _slowTime = 1f;
 
+    private Transform currentTarget;
     private float timeUntilFire;
 
     private void Update()
     {
         timeUntilFire += Time.deltaTime;
-
-        if (timeUntilFire >= 1f / _aps)
+        // Check if the current target is still valid (exists and within range)
+        if (currentTarget == null || !IsTargetInRange(currentTarget))
         {
-            FreezeEnemies();
-            timeUntilFire = 0;
+            FindTarget();
         }
 
-    }
-
-    private void FreezeEnemies()
-    {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _targetingRange, (Vector2)transform.position, 0f, _enemyMask);
-
-        if(hits.Length > 0)
+        // If there's a valid target, slow it periodically
+        if (currentTarget != null)
         {
-            for(int i = 0; i < hits.Length; i++)
+            
+            if (timeUntilFire >= 1f / _aps)
             {
-                RaycastHit2D hit = hits[i];
-
-                
+                ApplySlowEffect(currentTarget);
+                timeUntilFire = 0f;
             }
         }
+    }
+
+    private void FindTarget()
+    {
+        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, _targetingRange, Vector2.zero, 0f, _enemyMask);
+        if (hits.Length > 0)
+        {
+            currentTarget = hits[0].transform; // First enemy in range
+        }
+        else
+        {
+            currentTarget = null; // No target available
+        }
+    }
+
+    private void ApplySlowEffect(Transform target)
+    {
+        if (target != null)
+        {
+            Debug.Log("slowed");
+            Actions.UpdateEnemySpeed?.Invoke(target, _slowSpeed);
+            StartCoroutine(ResetSlowAfterDelay(target));
+        }
+    }
+
+    private IEnumerator ResetSlowAfterDelay(Transform target)
+    {
+        yield return new WaitForSeconds(_slowTime);
+
+        // Reset speed only if the target is still in range
+        if (target != null)
+        {
+            Actions.ResetEnemySpeed?.Invoke(target);
+        }
+    }
+
+    private bool IsTargetInRange(Transform target)
+    {
+        return target != null && Vector2.Distance(transform.position, target.position) <= _targetingRange;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Handles.color = Color.red;
+        Handles.DrawWireDisc(transform.position, transform.forward, _targetingRange);
     }
 }

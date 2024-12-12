@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public static class Actions
 {
@@ -8,7 +9,8 @@ public static class Actions
     public static Action OnRocketHit;
     public static Action OnBirdHit;
     public static Action OnPlaneHit;
-    public static Action<float> UpdateSpeed;
+    public static Action<Transform, float> UpdateEnemySpeed;
+    public static Action<Transform> ResetEnemySpeed;
     #endregion
 
     #region PLAYER

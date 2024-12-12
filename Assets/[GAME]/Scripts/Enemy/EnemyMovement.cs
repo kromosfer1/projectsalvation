@@ -11,11 +11,23 @@ public class EnemyMovement : MonoBehaviour
     private Transform target;
     private int pathIndex = 0;
 
-    private float baseSpeed;
+    private float movementSpeed;
+
+    private void OnEnable()
+    {
+        Actions.UpdateEnemySpeed += UpdateSpeed;
+        Actions.ResetEnemySpeed += ResetSpeed;
+    }
+
+    private void OnDisable()
+    {
+        Actions.UpdateEnemySpeed -= UpdateSpeed;
+        Actions.ResetEnemySpeed -= ResetSpeed;
+    }
 
     private void Start()
     {
-        baseSpeed = _enemyData.MovementSpeed;
+        movementSpeed = _enemyData.BaseMovementSpeed;
         target = EnemyPathManager.main.Path[pathIndex];
     }
 
@@ -42,16 +54,22 @@ public class EnemyMovement : MonoBehaviour
     {
         Vector2 dir = (target.position - transform.position).normalized;
 
-        _rb.linearVelocity = dir * _enemyData.MovementSpeed;
+        _rb.linearVelocity = dir * movementSpeed;
     }
 
-    public void UpdateSpeed(float newSpeed)
+    public void UpdateSpeed(Transform target, float newSpeed)
     {
-        _enemyData.MovementSpeed = newSpeed;
+        if (target == transform)
+        {
+            movementSpeed = newSpeed;
+        }
     }
 
-    public void ResetSpeed()
+    public void ResetSpeed(Transform target)
     {
-        _enemyData.MovementSpeed = baseSpeed;
+        if (target == transform)
+        {
+            movementSpeed = _enemyData.BaseMovementSpeed;
+        }
     }
 }
